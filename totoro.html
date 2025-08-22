@@ -1,353 +1,372 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyberpunk Ghibli - Neon Forest Spirits</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyberpunk Totoro</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap");
 
-        body {
-            height: 100vh;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000a1a 100%);
-            font-family: 'Courier New', monospace;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
+      body {
+        background: #0a0a0a;
+        overflow: hidden;
+        font-family: "Orbitron", monospace;
+        height: 100vh;
+        color: #00ffff;
+      }
 
-        /* Animated Grid Background */
-        .grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-        }
+      .cyberpunk-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(45deg, #1a0033, #000011, #001133);
+      }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
+      /* Animated Grid Background */
+      .grid-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+            rgba(0, 255, 255, 0.1) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+        background-size: 50px 50px;
+        animation: gridMove 20s linear infinite;
+      }
 
-        /* Floating Totoro Spirits */
-        .spirit {
-            position: absolute;
-            width: 60px;
-            height: 80px;
-            background: radial-gradient(circle at 30% 40%, #00ffff, #ff00ff);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            opacity: 0.7;
-            filter: blur(1px);
-            animation: float 8s ease-in-out infinite;
+      @keyframes gridMove {
+        0% {
+          transform: translate(0, 0);
         }
+        100% {
+          transform: translate(50px, 50px);
+        }
+      }
 
-        .spirit::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            width: 8px;
-            height: 8px;
-            background: #ffffff;
-            border-radius: 50%;
-            box-shadow: 15px 0 0 #ffffff, 7px 15px 0 #ff00ff;
-        }
+      /* Floating Particles */
+      .particle {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: #ff00ff;
+        border-radius: 50%;
+        animation: floatParticle 15s linear infinite;
+      }
 
-        .spirit::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            width: 20px;
-            height: 20px;
-            background: rgba(0, 255, 255, 0.3);
-            border-radius: 50% 50% 0 50%;
-            transform: rotate(-30deg);
+      @keyframes floatParticle {
+        0% {
+          transform: translateY(100vh) translateX(0);
+          opacity: 0;
         }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
 
-        .spirit:nth-child(2) {
-            left: 20%;
-            top: 30%;
-            animation-delay: -2s;
-            animation-duration: 10s;
-        }
+      /* Neon Lines */
+      .neon-line {
+        position: absolute;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #00ffff, transparent);
+        animation: neonPulse 3s ease-in-out infinite;
+      }
 
-        .spirit:nth-child(3) {
-            left: 60%;
-            top: 60%;
-            animation-delay: -4s;
-            animation-duration: 12s;
-            transform: scale(0.8);
+      @keyframes neonPulse {
+        0%,
+        100% {
+          opacity: 0.3;
+          box-shadow: 0 0 5px #00ffff;
         }
+        50% {
+          opacity: 1;
+          box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+        }
+      }
 
-        .spirit:nth-child(4) {
-            left: 80%;
-            top: 20%;
-            animation-delay: -6s;
-            animation-duration: 9s;
-            transform: scale(1.2);
-        }
+      /* Title */
+      .title {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3rem;
+        font-weight: 900;
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+        animation: titleGlow 2s ease-in-out infinite alternate;
+        z-index: 100;
+      }
 
-        .spirit:nth-child(5) {
-            left: 40%;
-            top: 80%;
-            animation-delay: -8s;
-            animation-duration: 11s;
+      @keyframes titleGlow {
+        from {
+          text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
         }
+        to {
+          text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+        }
+      }
 
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px) rotate(0deg);
-                filter: blur(1px) hue-rotate(0deg);
-            }
-            25% { 
-                transform: translateY(-20px) rotate(5deg);
-                filter: blur(2px) hue-rotate(90deg);
-            }
-            50% { 
-                transform: translateY(-40px) rotate(0deg);
-                filter: blur(1px) hue-rotate(180deg);
-            }
-            75% { 
-                transform: translateY(-20px) rotate(-5deg);
-                filter: blur(2px) hue-rotate(270deg);
-            }
-        }
+      /* Totoro Container */
+      .totoro-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+      }
 
-        /* Neon Trees */
-        .tree {
-            position: absolute;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to top, #00ff00, #00ffff);
-            box-shadow: 0 0 10px #00ff00;
-            animation: treeGlow 3s ease-in-out infinite alternate;
-        }
+      /* SVG Animations */
+      .totoro-svg {
+        width: 400px;
+        height: 600px;
+        filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
+        animation: totoroFloat 6s ease-in-out infinite;
+      }
 
-        .tree::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -15px;
-            width: 30px;
-            height: 30px;
-            background: radial-gradient(circle, rgba(0, 255, 0, 0.3), transparent);
-            border-radius: 50%;
-            animation: leafGlow 4s ease-in-out infinite;
+      @keyframes totoroFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+          filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
         }
+        50% {
+          transform: translateY(-20px) rotate(2deg);
+          filter: drop-shadow(0 0 30px #00ffff) drop-shadow(0 0 60px #ff00ff) drop-shadow(0 0 20px #ffff00);
+        }
+      }
 
-        .tree:nth-child(6) {
-            left: 10%;
-            height: 120px;
-            animation-delay: -1s;
-        }
+      /* Cyberpunk SVG Colors */
+      .cyber-totoro-main {
+        fill: url(#cyberGradient);
+        stroke: #00ffff;
+        stroke-width: 2;
+        animation: cyberGlow 3s ease-in-out infinite alternate;
+      }
 
-        .tree:nth-child(7) {
-            left: 25%;
-            height: 80px;
-            animation-delay: -2s;
-        }
+      .cyber-totoro-eyes {
+        fill: #ff00ff;
+        stroke: #00ffff;
+        stroke-width: 1;
+        animation: eyeGlow 2s ease-in-out infinite;
+      }
 
-        .tree:nth-child(8) {
-            left: 70%;
-            height: 100px;
-            animation-delay: -3s;
+      @keyframes cyberGlow {
+        from {
+          stroke: #00ffff;
+          filter: drop-shadow(0 0 5px #00ffff);
         }
+        to {
+          stroke: #ff00ff;
+          filter: drop-shadow(0 0 15px #ff00ff);
+        }
+      }
 
-        .tree:nth-child(9) {
-            left: 90%;
-            height: 90px;
-            animation-delay: -4s;
+      @keyframes eyeGlow {
+        0%, 100% {
+          fill: #ff00ff;
+          filter: drop-shadow(0 0 10px #ff00ff);
         }
+        50% {
+          fill: #00ffff;
+          filter: drop-shadow(0 0 20px #00ffff);
+        }
+      }
 
-        @keyframes treeGlow {
-            0% { box-shadow: 0 0 10px #00ff00; }
-            100% { box-shadow: 0 0 20px #00ff00, 0 0 30px #00ffff; }
-        }
+      /* Cyber Effects */
+      .cyber-effect {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(203, 27, 203, 0.1) 0%,
+          transparent 70%
+        );
+        animation: cyberPulse 4s ease-in-out infinite;
+      }
 
-        @keyframes leafGlow {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.3; }
-            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+      @keyframes cyberPulse {
+        0%,
+        100% {
+          opacity: 0.3;
+          transform: scale(1);
         }
+        50% {
+          opacity: 0.7;
+          transform: scale(1.1);
+        }
+      }
 
-        /* Particle System */
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00ffff;
-            border-radius: 50%;
-            animation: particle 15s linear infinite;
+      /* Responsive */
+      @media (max-width: 768px) {
+        .title {
+          font-size: 2rem;
+          top: 30px;
         }
+        
+        .totoro-svg {
+          width: 300px;
+          height: 450px;
+        }
+      }
 
-        .particle:nth-child(10) {
-            left: 15%;
-            animation-delay: -2s;
+      @media (max-width: 480px) {
+        .totoro-svg {
+          width: 250px;
+          height: 375px;
         }
-
-        .particle:nth-child(11) {
-            left: 35%;
-            animation-delay: -4s;
-        }
-
-        .particle:nth-child(12) {
-            left: 55%;
-            animation-delay: -6s;
-        }
-
-        .particle:nth-child(13) {
-            left: 75%;
-            animation-delay: -8s;
-        }
-
-        .particle:nth-child(14) {
-            left: 85%;
-            animation-delay: -10s;
-        }
-
-        @keyframes particle {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* Glitch Effect */
-        .glitch {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            color: #00ffff;
-            text-shadow: 
-                0 0 5px #00ffff,
-                0 0 10px #00ffff,
-                0 0 15px #00ffff;
-            animation: glitch 2s infinite;
-        }
-
-        @keyframes glitch {
-            0%, 100% {
-                text-shadow: 
-                    0 0 5px #00ffff,
-                    0 0 10px #00ffff,
-                    0 0 15px #00ffff;
-            }
-            25% {
-                text-shadow: 
-                    -2px 0 #ff00ff,
-                    2px 0 #00ffff,
-                    0 0 15px #00ffff;
-                transform: translate(-50%, -50%) skew(1deg);
-            }
-            50% {
-                text-shadow: 
-                    2px 0 #ff00ff,
-                    -2px 0 #00ffff,
-                    0 0 15px #ff00ff;
-                transform: translate(-50%, -50%) skew(-1deg);
-            }
-            75% {
-                text-shadow: 
-                    0 -2px #ff00ff,
-                    0 2px #00ffff,
-                    0 0 15px #00ff00;
-            }
-        }
-
-        /* Ambient Orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 0, 255, 0.8), rgba(0, 255, 255, 0.2));
-            animation: orbFloat 6s ease-in-out infinite;
-            filter: blur(2px);
-        }
-
-        .orb:nth-child(15) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            right: 10%;
-            animation-delay: -1s;
-        }
-
-        .orb:nth-child(16) {
-            width: 60px;
-            height: 60px;
-            bottom: 30%;
-            left: 5%;
-            animation-delay: -3s;
-        }
-
-        @keyframes orbFloat {
-            0%, 100% {
-                transform: translateY(0px) scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(-30px) scale(1.1);
-                opacity: 0.9;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="grid"></div>
-        
-        <!-- Totoro-inspired Spirits -->
-        <div class="spirit"></div>
-        <div class="spirit"></div>
-        <div class="spirit"></div>
-        <div class="spirit"></div>
-        <div class="spirit"></div>
-        
-        <!-- Neon Trees -->
-        <div class="tree"></div>
-        <div class="tree"></div>
-        <div class="tree"></div>
-        <div class="tree"></div>
-        
-        <!-- Floating Particles -->
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        
-        <!-- Central Glitch Text -->
-        <div class="glitch">ネオ森の精霊</div>
-        
-        <!-- Ambient Orbs -->
-        <div class="orb"></div>
-        <div class="orb"></div>
+  </head>
+  <body>
+    <div class="cyberpunk-container">
+      <!-- Grid Background -->
+      <div class="grid-background"></div>
+
+      <!-- Cyber Effect -->
+      <div class="cyber-effect"></div>
+
+      <!-- Title -->
+      <h1 class="title">CYBER TOTORO</h1>
+
+      <!-- Totoro SVG -->
+      <div class="totoro-container">
+        <svg
+          class="totoro-svg"
+          version="1.0"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1024 1536"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <defs>
+            <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#001133;stop-opacity:0.8" />
+              <stop offset="25%" style="stop-color:#00ffff;stop-opacity:0.6" />
+              <stop offset="50%" style="stop-color:#1a0033;stop-opacity:0.8" />
+              <stop offset="75%" style="stop-color:#ff00ff;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#000011;stop-opacity:0.8" />
+            </linearGradient>
+            <filter id="neonGlow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge> 
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <metadata>
+            Created by potrace 1.16, written by Peter Selinger 2001-2019
+          </metadata>
+          <g
+            transform="translate(0.000000,1536.000000) scale(0.100000,-0.100000)"
+            stroke="none"
+          >
+            <path
+              class="cyber-totoro-main"
+              fill="white"
+              filter="url(#neonGlow)"
+              d="M6522 11760 c41 -82 119 -390 157 -620 27 -161 54 -455 47 -515 -13 -115 -29 -140 -179 -277 -54 -50 -59 -57 -72 -123 -22 -104 -22 -104 52 -160 80 -59 103 -85 248 -265 134 -167 177 -241 272 -468 110 -262 136 -341 117 -349 -14 -5 -28 2 -29 15 -2 16 -63 181 -100 267 -7 17 -23 58 -35 93 -24 65 -37 80 -20 22 17 -59 4 -43 -35 46 -35 78 -66 133 -116 206 -21 30 -24 42 -9 33 16 -10 11 1 -7 16 -11 10 -14 10 -9 2 4 -7 5 -13 2 -13 -2 0 -18 24 -35 53 -16 29 -49 73 -71 97 -23 25 -55 64 -72 88 -16 23 -31 42 -34 42 -3 0 -2 -5 1 -10 4 -6 -29 17 -73 52 -44 35 -78 66 -76 69 2 4 -3 12 -11 19 -18 15 -21 161 -4 206 6 16 50 65 99 109 117 107 150 165 150 266 0 154 -50 573 -84 709 -14 52 -36 145 -51 205 -28 115 -51 168 -76 173 -8 1 -40 -38 -81 -100 -94 -145 -140 -235 -133 -261 4 -15 3 -18 -3 -9 -6 9 -14 -1 -27 -35 -10 -26 -46 -109 -80 -183 -110 -239 -127 -279 -119 -291 4 -7 3 -9 -4 -5 -23 14 -63 -261 -41 -287 131 -159 135 -178 55 -282 -37 -48 -46 -55 -69 -55 -11 0 -15 4 -11 12 4 6 3 8 -3 5 -6 -4 -48 9 -94 28 -46 20 -89 33 -96 31 -7 -3 -36 3 -65 14 -29 10 -48 19 -42 19 6 1 31 -6 54 -14 24 -8 45 -13 47 -11 6 6 -183 66 -205 65 -13 0 -12 -2 6 -9 31 -13 28 -22 -4 -10 -15 6 -70 15 -123 21 -117 13 -491 26 -491 18 0 -4 -33 -9 -72 -12 -40 -3 -95 -10 -123 -17 -27 -6 -67 -11 -89 -12 -21 0 -33 -4 -26 -8 7 -4 -8 -10 -36 -14 -78 -11 -163 -28 -243 -47 -46 -11 -81 -15 -95 -9 -25 9 -106 112 -106 133 0 8 22 43 48 78 77 102 84 119 84 225 0 51 -3 98 -7 104 -4 6 -19 57 -35 113 -28 103 -144 404 -196 509 -16 32 -55 109 -86 172 -45 90 -63 118 -88 131 -31 16 -32 16 -66 -20 -19 -20 -34 -44 -34 -53 0 -9 -9 -44 -20 -77 -13 -40 -18 -49 -15 -25 l5 35 -15 -40 c-26 -66 -45 -136 -36 -130 5 2 14 26 20 51 7 26 14 44 16 42 7 -7 -48 -192 -61 -203 -12 -11 -37 -146 -40 -211 -1 -22 -7 -51 -13 -63 -8 -13 -10 -38 -6 -59 3 -21 -1 -78 -10 -127 -20 -109 -22 -258 -5 -311 16 -50 38 -74 133 -142 48 -35 80 -65 84 -80 3 -15 8 -20 13 -12 4 6 10 -28 14 -77 l7 -88 -31 -28 c-18 -16 -29 -31 -26 -34 7 -7 -23 -43 -36 -43 -5 0 -6 5 -2 12 4 7 3 8 -5 4 -6 -4 -9 -11 -6 -16 3 -5 -9 -19 -27 -31 -54 -37 -199 -163 -249 -216 -47 -48 -119 -153 -119 -172 0 -5 -4 -13 -10 -16 -6 -4 -7 1 -4 12 5 15 4 16 -5 3 -6 -8 -11 -28 -11 -45 -1 -31 -29 -92 -30 -65 0 8 -14 -16 -31 -55 -16 -38 -39 -88 -49 -110 -11 -22 -21 -49 -23 -60 -2 -11 -9 -31 -14 -45 -6 -14 -18 -42 -27 -64 -9 -21 -13 -43 -9 -49 3 -5 2 -7 -4 -4 -5 3 -24 -39 -42 -94 -18 -54 -38 -99 -44 -99 -7 0 -6 -4 3 -10 21 -13 3 -12 -77 4 -64 13 -178 25 -304 31 -31 2 -76 6 -100 10 -80 13 -36 -3 96 -34 167 -41 297 -80 310 -93 7 -8 4 -8 -10 -3 -56 23 -404 107 -500 120 -136 20 -136 20 -102 34 19 7 58 8 130 1 159 -14 385 -39 461 -50 38 -6 70 -9 71 -8 1 2 9 32 19 68 28 105 145 418 190 510 54 107 139 238 207 315 61 71 210 213 292 279 36 30 57 55 58 69 2 37 -2 131 -7 147 -2 9 -37 32 -77 51 -60 29 -78 43 -109 89 -70 104 -72 157 -23 500 34 236 86 495 125 630 17 58 51 120 93 173 22 26 99 23 131 -5 58 -53 206 -382 275 -613 23 -77 60 -194 81 -260 22 -66 42 -137 45 -157 3 -21 8 -54 11 -74 3 -24 2 -34 -5 -29 -7 3 -8 0 -5 -9 9 -25 -30 -98 -84 -156 -29 -30 -52 -58 -52 -63 0 -14 51 -88 65 -93 8 -4 86 10 172 30 202 47 179 43 337 66 90 13 211 21 358 24 218 5 251 3 478 -32 36 -6 136 -36 223 -66 87 -31 167 -56 177 -56 16 0 80 75 80 93 0 3 -29 44 -65 92 -35 48 -67 102 -71 120 -3 18 -1 73 5 122 12 100 52 211 149 413 33 69 72 157 87 195 53 135 199 419 237 458 51 54 75 49 110 -23z m-2397 -2394 c92 -42 167 -158 168 -261 1 -40 -7 -68 -32 -118 -35 -73 -69 -102 -144 -129 -121 -43 -234 -14 -320 81 -42 47 -51 84 -45 190 5 85 29 141 85 193 68 65 200 85 288 44z m2141 8 c62 -21 107 -58 146 -118 27 -41 32 -60 36 -126 6 -96 -7 -136 -61 -193 -48 -50 -105 -82 -162 -92 -22 -3 -51 -8 -65 -11 -17 -3 -21 -2 -12 4 10 6 2 11 -26 14 -81 11 -169 94 -193 182 -16 60 -6 162 20 197 12 15 21 31 21 34 0 4 14 18 30 32 17 13 28 29 25 33 -7 11 14 24 40 26 11 1 38 9 60 18 52 20 83 20 141 0z m1524 -354 c-14 -4 -65 -15 -115 -24 -49 -9 -121 -28 -160 -41 -38 -13 -115 -35 -170 -50 -55 -15 -103 -29 -106 -31 -5 -3 38 -194 47 -212 1 -2 71 -5 156 -8 84 -2 178 -6 208 -9 30 -2 84 -7 120 -11 36 -3 79 -9 95 -14 17 -4 68 -14 115 -20 47 -7 91 -16 99 -20 8 -4 -78 -7 -190 -7 -112 1 -278 -2 -369 -5 -92 -4 -145 -3 -120 1 25 5 144 12 265 17 161 6 205 10 165 15 -30 4 -78 7 -107 8 -28 1 -53 6 -55 12 -2 6 -78 13 -201 19 -109 4 -199 10 -200 12 -1 1 -10 18 -21 37 -22 39 -58 174 -45 165 5 -3 9 -11 9 -18 0 -19 31 -119 35 -114 2 2 -3 34 -12 71 -13 51 -13 69 -4 80 6 8 58 27 114 42 56 15 116 33 132 40 17 8 53 21 80 29 l50 16 -105 -6 c-58 -3 -130 -10 -160 -16 -30 -5 -71 -12 -90 -14 -19 -3 -51 -10 -70 -15 -19 -5 -60 -9 -90 -8 -49 1 -52 2 -25 10 39 12 326 56 435 68 110 11 324 12 290 1z m-4830 -305 c-11 -39 -20 -71 -20 -72 0 -2 33 -4 73 -4 39 -1 65 -3 57 -5 -17 -4 -339 -25 -441 -29 -66 -2 -169 -24 -169 -35 0 -3 -9 -6 -19 -7 -11 -1 -41 -9 -68 -18 -34 -12 -92 -18 -203 -21 -182 -4 -167 5 60 36 85 12 180 28 210 37 92 24 300 53 391 53 l86 0 18 60 c10 33 22 60 28 60 5 0 6 8 2 18 -4 12 -3 14 4 7 8 -8 5 -32 -9 -80z m4409 -260 c27 -87 37 -105 53 -105 30 0 214 -55 297 -89 40 -17 114 -53 164 -80 51 -27 118 -59 150 -71 105 -39 52 -33 -75 9 -67 23 -163 48 -213 56 -49 9 -117 22 -150 30 -50 12 -170 35 -182 35 -2 0 1 -8 6 -17 6 -10 35 -71 65 -135 30 -64 95 -181 144 -260 119 -191 179 -301 269 -487 109 -226 157 -346 324 -806 11 -33 38 -107 59 -165 62 -171 91 -305 124 -581 17 -137 36 -504 31 -584 -2 -27 -6 -93 -9 -145 -14 -217 -76 -501 -141 -645 -28 -60 -35 -87 -30 -111 11 -62 -40 -251 -86 -316 -26 -35 -69 -39 -69 -6 0 16 3 19 11 11 13 -13 23 -6 50 37 26 40 38 89 48 185 7 67 19 114 47 180 55 134 81 231 114 435 58 354 50 782 -19 1072 -5 20 -6 39 -4 42 3 3 0 36 -7 74 -6 39 -13 77 -14 86 -1 8 -5 18 -8 22 -4 3 -4 13 -1 22 4 10 2 13 -6 8 -9 -6 -10 0 -6 21 5 23 4 25 -5 13 -10 -12 -11 -10 -6 10 8 34 -63 248 -75 229 -6 -9 -7 -2 -3 19 4 19 2 32 -4 32 -6 0 -20 33 -32 73 -60 197 -239 635 -259 630 -4 -1 -17 18 -30 43 -12 26 -16 42 -9 38 8 -5 7 1 -3 16 -28 44 -44 75 -45 90 -2 17 -36 91 -62 135 -9 17 -35 62 -57 100 -21 39 -45 76 -51 82 -44 45 -234 384 -234 417 0 5 -9 28 -19 50 -11 23 -23 54 -27 70 l-7 29 64 -7 c35 -3 93 -13 129 -21 36 -8 120 -26 186 -39 67 -13 128 -27 135 -32 12 -6 12 -5 1 8 -7 9 -27 18 -44 22 -17 3 -54 17 -82 30 -88 41 -336 120 -470 151 -72 16 -128 41 -71 31 17 -3 59 -12 93 -20 60 -14 63 -14 49 2 -11 13 -67 162 -67 179 0 2 8 3 18 3 13 0 25 -25 51 -105z m-4484 48 c-3 -10 -15 -54 -25 -98 -10 -44 -22 -88 -25 -97 -6 -15 -3 -15 41 -2 27 8 53 13 59 11 5 -2 -6 -7 -25 -12 -54 -12 -368 -119 -435 -148 -85 -38 -204 -99 -180 -93 11 3 76 19 144 36 132 33 304 70 326 70 9 0 6 -16 -12 -52 -14 -29 -40 -84 -58 -123 -17 -38 -43 -83 -56 -100 -13 -16 -40 -55 -60 -85 -19 -30 -57 -87 -83 -127 -42 -64 -52 -85 -55 -116 -1 -5 -5 -5 -11 -2 -5 3 -7 0 -4 -8 3 -8 -6 -28 -20 -44 -26 -31 -92 -157 -125 -239 -11 -27 -43 -96 -71 -154 -29 -58 -72 -149 -97 -203 -24 -55 -50 -109 -58 -121 -8 -12 -16 -31 -18 -41 -2 -11 -9 -30 -15 -43 -18 -31 -110 -313 -129 -392 -8 -36 -17 -84 -20 -107 -3 -24 -8 -41 -12 -39 -3 2 -7 -9 -8 -26 0 -17 -10 -72 -21 -122 -27 -122 -61 -343 -68 -440 -3 -43 -9 -99 -15 -125 -5 -25 -12 -151 -16 -280 -5 -191 -4 -233 7 -226 10 6 12 -1 7 -35 -4 -29 -2 -39 4 -29 6 10 9 6 9 -16 1 -35 32 -207 58 -320 10 -44 39 -125 64 -180 29 -65 47 -121 51 -160 7 -63 29 -135 70 -222 27 -59 37 -59 37 2 0 44 22 109 41 120 15 10 34 -21 49 -79 19 -77 54 -138 116 -205 31 -34 59 -61 63 -61 4 0 18 22 31 50 13 27 25 48 27 46 6 -5 -43 -112 -54 -119 -5 -3 -38 21 -72 53 -66 64 -96 118 -127 226 -10 35 -22 64 -25 64 -4 0 -10 -21 -14 -47 -4 -27 -12 -54 -17 -61 -6 -7 -8 -29 -4 -51 11 -69 -15 -63 -62 14 -40 65 -68 153 -77 238 -5 49 -19 94 -50 160 -56 120 -86 218 -125 405 -39 189 -53 348 -45 517 19 442 125 1024 245 1340 10 28 32 86 49 131 30 82 97 230 211 469 34 72 69 146 78 165 15 33 68 125 206 358 34 57 81 129 105 160 37 49 131 225 131 246 0 11 -99 -3 -165 -24 -33 -10 -67 -18 -75 -18 -14 1 -263 -63 -305 -78 l-20 -7 20 19 c11 11 61 36 110 58 50 21 110 50 135 65 71 43 167 82 280 117 l104 32 28 98 c36 125 35 124 49 124 6 0 8 -7 4 -17z m-511 -4504 c3 -24 10 -64 16 -89 6 -25 16 -70 21 -100 21 -112 62 -277 85 -340 12 -36 46 -141 74 -235 38 -127 71 -210 129 -330 175 -355 184 -376 170 -402 -7 -12 -15 -23 -18 -23 -5 0 -178 365 -211 445 -7 17 -34 95 -60 175 -44 132 -66 206 -145 475 -39 134 -93 496 -70 474 2 -3 7 -25 9 -50z m5371 -276 c-26 -144 -109 -419 -202 -669 -47 -128 -228 -511 -256 -545 -9 -10 -17 -33 -17 -49 0 -17 -5 -30 -10 -30 -21 0 -22 33 -2 68 87 157 236 516 327 794 67 202 93 292 158 538 12 44 12 44 15 13 2 -18 -4 -72 -13 -120z"
+            />
+            <path
+              class="cyber-totoro-eyes"
+              fill="white"
+              filter="url(#neonGlow)"
+              d="M3953 9220 c-18 -11 -33 -22 -33 -25 0 -4 5 -3 12 1 7 4 8 3 4 -5 -4 -6 -11 -9 -16 -6 -16 10 -40 -39 -40 -80 0 -29 7 -46 25 -63 13 -13 23 -28 22 -34 -1 -6 19 -20 45 -31 45 -19 49 -19 90 -4 57 22 88 68 88 130 0 63 -17 95 -62 118 -48 24 -94 24 -135 -1z"
+            />
+            <path
+              class="cyber-totoro-eyes"
+              fill="white"
+              filter="url(#neonGlow)"
+              d="M6102 9216 c-51 -40 -60 -109 -25 -179 22 -43 140 -87 157 -58 4 5 -4 7 -16 4 -19 -4 -17 -1 8 15 17 11 40 33 52 48 13 18 19 21 15 10 -5 -14 -3 -17 6 -11 16 10 10 120 -7 137 -10 10 -11 5 -7 -22 l5 -35 -10 31 c-6 21 -20 36 -40 44 -30 13 -38 26 -20 32 6 2 -13 3 -42 3 -36 0 -59 -6 -76 -19z"
+            />
+          </g>
+        </svg>
+      </div>
     </div>
-</body>
+
+    <script>
+      // Create floating particles
+      function createParticle() {
+        const particle = document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.left = Math.random() * 100 + "vw";
+        particle.style.animationDelay = Math.random() * 15 + "s";
+        particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+
+        // Random colors
+        const colors = ["#ff00ff", "#00ffff", "#ffff00", "#ff0080"];
+        particle.style.background =
+          colors[Math.floor(Math.random() * colors.length)];
+
+        document.querySelector(".cyberpunk-container").appendChild(particle);
+
+        // Remove particle after animation
+        setTimeout(() => {
+          if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+          }
+        }, 25000);
+      }
+
+      // Create neon lines
+      function createNeonLine() {
+        const line = document.createElement("div");
+        line.classList.add("neon-line");
+        line.style.top = Math.random() * 100 + "vh";
+        line.style.left = "0";
+        line.style.width = "100vw";
+        line.style.animationDelay = Math.random() * 3 + "s";
+
+        document.querySelector(".cyberpunk-container").appendChild(line);
+
+        setTimeout(() => {
+          if (line.parentNode) {
+            line.parentNode.removeChild(line);
+          }
+        }, 3000);
+      }
+
+      // Generate particles and lines
+      setInterval(createParticle, 2000);
+      setInterval(createNeonLine, 5000);
+
+      // Initial particles
+      for (let i = 0; i < 10; i++) {
+        setTimeout(createParticle, i * 500);
+      }
+
+      // Initial lines
+      for (let i = 0; i < 3; i++) {
+        setTimeout(createNeonLine, i * 1000);
+      }
+
+      // Mouse interaction
+      document.addEventListener("mousemove", (e) => {
+        const container = document.querySelector(".cyberpunk-container");
+        const rect = container.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
+        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
+
+        document.querySelector(
+          ".totoro-container"
+        ).style.transform = `translate(${-50 + x}%, ${-50 + y}%)`;
+      });
+    </script>
+  </body>
 </html>
