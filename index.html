@@ -12,14 +12,14 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            color: #00ff88;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1e2a3a 50%, #2c3e50 100%);
+            color: #e8eaed;
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* Matrix Rain Effect */
+        /* Circuit Board Effect */
         #matrix-bg {
             position: fixed;
             top: 0;
@@ -27,7 +27,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         /* Animated Grid Background */
@@ -38,10 +38,10 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+                linear-gradient(rgba(99, 155, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 155, 255, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 25s linear infinite;
             z-index: -2;
         }
 
@@ -59,7 +59,7 @@
             align-items: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(ellipse at center, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            background: radial-gradient(ellipse at center, rgba(99, 155, 255, 0.1) 0%, transparent 70%);
         }
 
         .name-container {
@@ -68,21 +68,22 @@
 
         .name {
             font-size: 4rem;
-            font-weight: bold;
-            text-shadow: 0 0 20px #00ff88;
-            animation: glow 2s ease-in-out infinite alternate;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 30px rgba(99, 155, 255, 0.5);
+            animation: glow 3s ease-in-out infinite alternate;
         }
 
         .chinese-name {
             font-size: 2rem;
-            color: #66ffaa;
+            color: #7fb3d3;
             margin-top: 0.5rem;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 20px #00ff88; }
-            to { text-shadow: 0 0 30px #00ff88, 0 0 40px #00ff88; }
+            from { text-shadow: 0 0 20px rgba(99, 155, 255, 0.5); }
+            to { text-shadow: 0 0 40px rgba(99, 155, 255, 0.8), 0 0 60px rgba(99, 155, 255, 0.3); }
         }
 
         .title-container {
@@ -92,21 +93,22 @@
 
         .typing-text {
             font-size: 1.5rem;
-            color: #88ffaa;
-            border-right: 2px solid #00ff88;
+            color: #639bff;
+            border-right: 2px solid #639bff;
             padding-right: 5px;
-            animation: blink 1s infinite;
+            animation: blink 1.2s infinite;
         }
 
         @keyframes blink {
             0%, 50% { border-color: transparent; }
-            51%, 100% { border-color: #00ff88; }
+            51%, 100% { border-color: #639bff; }
         }
 
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
             font-size: 2rem;
+            color: #7fb3d3;
             animation: bounce 2s infinite;
         }
 
@@ -126,12 +128,13 @@
         section {
             margin-bottom: 6rem;
             padding: 3rem;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid #00ff88;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
+            background: rgba(15, 20, 25, 0.8);
+            border: 1px solid rgba(99, 155, 255, 0.3);
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         section::before {
@@ -141,8 +144,8 @@
             left: -100%;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff88, transparent);
-            animation: scan 3s infinite;
+            background: linear-gradient(90deg, transparent, #639bff, transparent);
+            animation: scan 4s infinite;
         }
 
         @keyframes scan {
@@ -153,41 +156,44 @@
         h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: #00ff88;
+            color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: 600;
         }
 
         h3 {
             font-size: 1.8rem;
-            color: #66ffaa;
+            color: #639bff;
             margin-bottom: 1rem;
-            border-left: 4px solid #00ff88;
+            border-left: 4px solid #639bff;
             padding-left: 1rem;
+            font-weight: 500;
         }
 
         .job-title {
-            color: #88ffaa;
+            color: #7fb3d3;
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .company {
-            color: #aaffcc;
-            font-weight: bold;
+            color: #b8d4ea;
+            font-weight: 600;
             margin-bottom: 1rem;
         }
 
         .date {
-            color: #66ff88;
+            color: #8bb4d8;
             font-style: italic;
             margin-bottom: 1.5rem;
         }
 
         .highlight {
-            color: #00ffff;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ffff;
+            color: #639bff;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(99, 155, 255, 0.3);
         }
 
         ul {
@@ -199,19 +205,20 @@
             margin-bottom: 0.8rem;
             padding-left: 1.5rem;
             position: relative;
+            color: #e8eaed;
         }
 
         li::before {
             content: '▶';
             position: absolute;
             left: 0;
-            color: #00ff88;
-            animation: pulse 2s infinite;
+            color: #639bff;
+            animation: pulse 3s infinite;
         }
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.6; }
         }
 
         .skills-grid {
@@ -222,44 +229,54 @@
         }
 
         .skill-category {
-            background: rgba(0, 255, 136, 0.1);
+            background: rgba(99, 155, 255, 0.08);
             padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(99, 155, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(99, 155, 255, 0.12);
+            border-color: rgba(99, 155, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .skill-category h4 {
-            color: #00ff88;
+            color: #639bff;
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .publications {
-            background: rgba(0, 255, 255, 0.05);
-            border-color: #00ffff;
+            background: rgba(15, 20, 25, 0.9);
+            border-color: rgba(127, 179, 211, 0.3);
         }
 
         .publication {
             margin-bottom: 2rem;
             padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-left: 4px solid #00ffff;
+            background: rgba(0, 0, 0, 0.4);
+            border-left: 4px solid #7fb3d3;
+            border-radius: 6px;
         }
 
         .publication h4 {
-            color: #00ffff;
+            color: #ffffff;
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .authors {
-            color: #88ddff;
+            color: #9cc5e0;
             font-style: italic;
             margin-bottom: 0.5rem;
         }
 
         .journal {
-            color: #aaeeff;
-            font-weight: bold;
+            color: #b8d4ea;
+            font-weight: 600;
         }
 
         /* Contact */
@@ -272,39 +289,45 @@
 
         .contact-item {
             text-align: center;
-            padding: 1rem;
-            background: rgba(0, 255, 136, 0.1);
-            border-radius: 8px;
+            padding: 1.5rem;
+            background: rgba(99, 155, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(99, 155, 255, 0.2);
             transition: all 0.3s ease;
+            min-width: 180px;
         }
 
         .contact-item:hover {
-            background: rgba(0, 255, 136, 0.2);
+            background: rgba(99, 155, 255, 0.15);
+            border-color: rgba(99, 155, 255, 0.4);
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(99, 155, 255, 0.1);
         }
 
         .contact-item a {
-            color: #00ff88;
+            color: #639bff;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
         .contact-item a:hover {
-            text-shadow: 0 0 10px #00ff88;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(99, 155, 255, 0.5);
         }
 
         /* Floating particles */
         .particle {
             position: absolute;
-            background: #00ff88;
+            background: #639bff;
             border-radius: 50%;
-            opacity: 0.6;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0.4;
+            animation: float 8s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.4; }
+            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
         }
 
         /* Responsive */
@@ -319,7 +342,7 @@
         /* Glitch effect for section headers */
         .glitch {
             position: relative;
-            animation: glitch 2s infinite;
+            animation: glitch 4s infinite;
         }
 
         .glitch::before,
@@ -328,37 +351,37 @@
             position: absolute;
             left: 0;
             top: 0;
-            opacity: 0.8;
+            opacity: 0.7;
         }
 
         .glitch::before {
-            color: #ff0080;
-            animation: glitch-1 0.5s infinite;
+            color: #7fb3d3;
+            animation: glitch-1 0.8s infinite;
             clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
         }
 
         .glitch::after {
-            color: #00ffff;
-            animation: glitch-2 0.5s infinite;
+            color: #b8d4ea;
+            animation: glitch-2 0.8s infinite;
             clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
         }
 
         @keyframes glitch {
             0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
         }
 
         @keyframes glitch-1 {
             0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, -2px); }
+            20% { transform: translate(-1px, -1px); }
         }
 
         @keyframes glitch-2 {
             0%, 100% { transform: translate(0); }
-            20% { transform: translate(2px, 2px); }
+            20% { transform: translate(1px, 1px); }
         }
     </style>
 </head>
@@ -565,41 +588,53 @@
         // Start typing animation
         typeText();
 
-        // Matrix rain effect
+        // Circuit board pattern effect
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         
-        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()_+-=[]{}|;:,.<>?';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
+        const patterns = ['─', '│', '┌', '┐', '└', '┘', '├', '┤', '┬', '┴', '┼'];
+        const fontSize = 16;
+        const columns = Math.floor(canvas.width / fontSize);
+        const rows = Math.floor(canvas.height / fontSize);
         
-        const drops = [];
+        const grid = [];
         for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
-        
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#00ff88';
-            ctx.font = fontSize + 'px monospace';
-            
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+            grid[i] = [];
+            for (let j = 0; j < rows; j++) {
+                grid[i][j] = {
+                    char: patterns[Math.floor(Math.random() * patterns.length)],
+                    alpha: Math.random() * 0.3
+                };
             }
         }
         
-        setInterval(drawMatrix, 50);
+        function drawCircuitBoard() {
+            ctx.fillStyle = 'rgba(15, 20, 25, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < columns; i++) {
+                for (let j = 0; j < rows; j++) {
+                    const cell = grid[i][j];
+                    ctx.fillStyle = `rgba(99, 155, 255, ${cell.alpha})`;
+                    ctx.fillText(cell.char, i * fontSize, j * fontSize);
+                    
+                    // Randomly update some cells
+                    if (Math.random() < 0.002) {
+                        cell.char = patterns[Math.floor(Math.random() * patterns.length)];
+                        cell.alpha = Math.random() * 0.4;
+                    } else {
+                        cell.alpha *= 0.995; // Fade out slowly
+                    }
+                }
+            }
+        }
+        
+        setInterval(drawCircuitBoard, 100);
 
         // Resize canvas on window resize
         window.addEventListener('resize', () => {
