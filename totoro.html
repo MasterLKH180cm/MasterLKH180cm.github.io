@@ -26,15 +26,13 @@
         width: 100vw;
         height: 100vh;
         background: linear-gradient(45deg, #1a0033, #000011, #001133);
+        overflow: hidden;
       }
 
-      /* Animated Grid Background */
+      /* Animated Grid Background (GPU-accelerated) */
       .grid-background {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         background-image: linear-gradient(
             rgba(0, 255, 255, 0.1) 1px,
             transparent 1px
@@ -42,61 +40,74 @@
           linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
         background-size: 50px 50px;
         animation: gridMove 20s linear infinite;
+        will-change: transform;
       }
-
       @keyframes gridMove {
-        0% {
-          transform: translate(0, 0);
-        }
-        100% {
+        to {
           transform: translate(50px, 50px);
         }
       }
 
-      /* Floating Particles */
-      .particle {
+      /* Particles — reduced to ::before pseudo-elements instead of many DOM nodes */
+      .particles {
         position: absolute;
-        width: 2px;
-        height: 2px;
-        background: #ff00ff;
-        border-radius: 50%;
-        animation: floatParticle 15s linear infinite;
+        inset: 0;
+        pointer-events: none;
       }
-
+      .particles::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background-image: radial-gradient(
+            circle 2px,
+            #ff00ff 50%,
+            transparent 51%
+          ),
+          radial-gradient(circle 2px, #00ffff 50%, transparent 51%),
+          radial-gradient(circle 2px, #ffff00 50%, transparent 51%),
+          radial-gradient(circle 2px, #ff0080 50%, transparent 51%);
+        background-size: 10% 10%;
+        background-repeat: repeat;
+        animation: floatParticle 15s linear infinite;
+        will-change: transform;
+      }
       @keyframes floatParticle {
         0% {
-          transform: translateY(100vh) translateX(0);
-          opacity: 0;
-        }
-        10% {
-          opacity: 1;
-        }
-        90% {
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-100px) translateX(100px);
-          opacity: 0;
-        }
-      }
-
-      /* Neon Lines */
-      .neon-line {
-        position: absolute;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #00ffff, transparent);
-        animation: neonPulse 3s ease-in-out infinite;
-      }
-
-      @keyframes neonPulse {
-        0%,
-        100% {
-          opacity: 0.3;
-          box-shadow: 0 0 5px #00ffff;
+          transform: translateY(0) translateX(0);
+          opacity: 0.5;
         }
         50% {
           opacity: 1;
-          box-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff;
+        }
+        100% {
+          transform: translateY(-20%) translateX(10%);
+          opacity: 0.5;
+        }
+      }
+
+      /* Neon Lines (single element with gradient stripes instead of 10 divs) */
+      .neon-lines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0 9%,
+          rgba(0, 255, 255, 0.4) 10%,
+          transparent 11%
+        );
+        animation: neonPulse 3s ease-in-out infinite;
+        will-change: opacity, filter;
+      }
+      @keyframes neonPulse {
+        0%,
+        100% {
+          filter: drop-shadow(0 0 5px #00ffff);
+          opacity: 0.4;
+        }
+        50% {
+          filter: drop-shadow(0 0 20px #00ffff);
+          opacity: 1;
         }
       }
 
@@ -108,57 +119,43 @@
         transform: translateX(-50%);
         font-size: 3rem;
         font-weight: 900;
-        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+        text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
         animation: titleGlow 2s ease-in-out infinite alternate;
         z-index: 100;
       }
-
       @keyframes titleGlow {
-        from {
-          text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-        }
         to {
-          text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+          text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
         }
       }
 
-      /* Totoro Container */
+      /* Totoro */
       .totoro-container {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 10;
+        will-change: transform;
       }
-
-      /* SVG Animations */
       .totoro-svg {
         width: 400px;
         height: 600px;
         filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
         animation: totoroFloat 6s ease-in-out infinite;
       }
-
       @keyframes totoroFloat {
-        0%,
-        100% {
-          transform: translateY(0) rotate(0deg);
-          filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
-        }
         50% {
           transform: translateY(-20px) rotate(2deg);
-          filter: drop-shadow(0 0 30px #00ffff) drop-shadow(0 0 60px #ff00ff) drop-shadow(0 0 20px #ffff00);
         }
       }
 
-      /* Cyberpunk SVG Colors */
       .cyber-totoro-main {
         fill: url(#cyberGradient);
         stroke: #00ffff;
         stroke-width: 2;
         animation: cyberGlow 3s ease-in-out infinite alternate;
       }
-
       .cyber-totoro-eyes {
         fill: #ff00ff;
         stroke: #00ffff;
@@ -167,49 +164,33 @@
       }
 
       @keyframes cyberGlow {
-        from {
-          stroke: #00ffff;
-          filter: drop-shadow(0 0 5px #00ffff);
-        }
         to {
           stroke: #ff00ff;
           filter: drop-shadow(0 0 15px #ff00ff);
         }
       }
-
       @keyframes eyeGlow {
-        0%, 100% {
-          fill: #ff00ff;
-          filter: drop-shadow(0 0 10px #ff00ff);
-        }
         50% {
           fill: #00ffff;
           filter: drop-shadow(0 0 20px #00ffff);
         }
       }
 
-      /* Cyber Effects */
+      /* Cyber Pulse Effect */
       .cyber-effect {
         position: absolute;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         background: radial-gradient(
           circle at 50% 50%,
-          rgba(203, 27, 203, 0.1) 0%,
+          rgba(203, 27, 203, 0.15) 0%,
           transparent 70%
         );
         animation: cyberPulse 4s ease-in-out infinite;
       }
-
       @keyframes cyberPulse {
-        0%,
-        100% {
-          opacity: 0.3;
-          transform: scale(1);
-        }
         50% {
           opacity: 0.7;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
       }
 
@@ -219,13 +200,11 @@
           font-size: 2rem;
           top: 30px;
         }
-        
         .totoro-svg {
           width: 300px;
           height: 450px;
         }
       }
-
       @media (max-width: 480px) {
         .totoro-svg {
           width: 250px;
@@ -236,17 +215,14 @@
   </head>
   <body>
     <div class="cyberpunk-container">
-      <!-- Grid Background -->
       <div class="grid-background"></div>
-
-      <!-- Cyber Effect -->
       <div class="cyber-effect"></div>
-
-      <!-- Title -->
+      <div class="particles"></div>
       <h1 class="title">CYBER TOTORO</h1>
 
-      <!-- Totoro SVG -->
+      <!-- Totoro -->
       <div class="totoro-container">
+        <!-- your SVG (unchanged for visuals, omitted here for brevity) -->
         <svg
           class="totoro-svg"
           version="1.0"
@@ -255,18 +231,39 @@
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
-            <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#001133;stop-opacity:0.8" />
-              <stop offset="25%" style="stop-color:#00ffff;stop-opacity:0.6" />
-              <stop offset="50%" style="stop-color:#1a0033;stop-opacity:0.8" />
-              <stop offset="75%" style="stop-color:#ff00ff;stop-opacity:0.6" />
-              <stop offset="100%" style="stop-color:#000011;stop-opacity:0.8" />
+            <linearGradient
+              id="cyberGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop
+                offset="0%"
+                style="stop-color: #001133; stop-opacity: 0.8"
+              />
+              <stop
+                offset="25%"
+                style="stop-color: #00ffff; stop-opacity: 0.6"
+              />
+              <stop
+                offset="50%"
+                style="stop-color: #1a0033; stop-opacity: 0.8"
+              />
+              <stop
+                offset="75%"
+                style="stop-color: #ff00ff; stop-opacity: 0.6"
+              />
+              <stop
+                offset="100%"
+                style="stop-color: #000011; stop-opacity: 0.8"
+              />
             </linearGradient>
             <filter id="neonGlow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-              <feMerge> 
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           </defs>
@@ -301,72 +298,25 @@
     </div>
 
     <script>
-      // Create floating particles
-      function createParticle() {
-        const particle = document.createElement("div");
-        particle.classList.add("particle");
-        particle.style.left = Math.random() * 100 + "vw";
-        particle.style.animationDelay = Math.random() * 15 + "s";
-        particle.style.animationDuration = Math.random() * 10 + 10 + "s";
+      /** Parallax with transform3d (cheaper) */
+      const totoro = document.querySelector(".totoro-container");
+      let targetX = 0,
+        targetY = 0,
+        currentX = 0,
+        currentY = 0;
 
-        // Random colors
-        const colors = ["#ff00ff", "#00ffff", "#ffff00", "#ff0080"];
-        particle.style.background =
-          colors[Math.floor(Math.random() * colors.length)];
-
-        document.querySelector(".cyberpunk-container").appendChild(particle);
-
-        // Remove particle after animation
-        setTimeout(() => {
-          if (particle.parentNode) {
-            particle.parentNode.removeChild(particle);
-          }
-        }, 25000);
-      }
-
-      // Create neon lines
-      function createNeonLine() {
-        const line = document.createElement("div");
-        line.classList.add("neon-line");
-        line.style.top = Math.random() * 100 + "vh";
-        line.style.left = "0";
-        line.style.width = "100vw";
-        line.style.animationDelay = Math.random() * 3 + "s";
-
-        document.querySelector(".cyberpunk-container").appendChild(line);
-
-        setTimeout(() => {
-          if (line.parentNode) {
-            line.parentNode.removeChild(line);
-          }
-        }, 3000);
-      }
-
-      // Generate particles and lines
-      setInterval(createParticle, 2000);
-      setInterval(createNeonLine, 5000);
-
-      // Initial particles
-      for (let i = 0; i < 10; i++) {
-        setTimeout(createParticle, i * 500);
-      }
-
-      // Initial lines
-      for (let i = 0; i < 3; i++) {
-        setTimeout(createNeonLine, i * 1000);
-      }
-
-      // Mouse interaction
       document.addEventListener("mousemove", (e) => {
-        const container = document.querySelector(".cyberpunk-container");
-        const rect = container.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20;
-        const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20;
-
-        document.querySelector(
-          ".totoro-container"
-        ).style.transform = `translate(${-50 + x}%, ${-50 + y}%)`;
+        targetX = (e.clientX / window.innerWidth - 0.5) * 40;
+        targetY = (e.clientY / window.innerHeight - 0.5) * 40;
       });
+
+      function animate() {
+        currentX += (targetX - currentX) * 0.07;
+        currentY += (targetY - currentY) * 0.07;
+        totoro.style.transform = `translate3d(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px), 0)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
     </script>
   </body>
 </html>
